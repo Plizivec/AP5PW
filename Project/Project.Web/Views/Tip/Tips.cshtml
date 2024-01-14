@@ -1,0 +1,68 @@
+﻿@model IList<Tip>
+
+@{
+    ViewData["Title"] = "Kuchařské tipy";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Kuchařské tipy</h1>
+</div>
+
+<div class="d-flex justify-content-center" style="padding: 30px 0px 30px 0px">
+    <form asp-action="Search" asp-controller="Tip" method="get" class="input-group" style="width: 80%; max-width: 300px;">
+        <div class="form-group has-search mx-auto">
+            <span class="fa fa-search form-control-feedback"></span>
+            <input type="text" class="form-control" placeholder="Search" name="searchTerm">
+        </div>
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+</div>
+
+<div class="text-center mt-3">
+    <a asp-action="Create" asp-controller="Tip" class="btn btn-primary">Vytvořit nový tip</a>
+</div>
+
+@if (Model != null && Model.Count > 0)
+{
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 justify-content-start">
+                @for (int i = 0; i < Model.Count; ++i)
+                {
+                    <div class="col-md-3 mb-5">
+                        <a asp-action="Details" asp-controller="Tip" asp-route-id="@Model[i].Id" class="card h-100 text-decoration-none">
+
+                            <img class="card-img-top" src="@Model[i].ImageSrc" alt="..." style="height: 200px;" />
+
+                            <div class="text-center" style="background-color: #6C5F5B">
+
+                                <h4 class="fw-bolder" style="color: #F2EAD3;">
+                                    @Model[i].Name
+                                </h4>
+                            </div>
+                            <div class="tip-text" style="background-color: #FFFAF7">
+                                @Model[i].Text.Substring(0, Math.Min(50, Model[i].Text.Length)) <!-- Displaying the first 50 characters of the tip text -->
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<style>
+    body {
+        background-color: #F6F1EE;
+    }
+
+    .tip-text {
+        font-weight: bold;
+        font-size: 18px;
+        padding-top: 10px;
+        padding-left: 5px;
+        color: #6C5F5B; /* You can adjust the text color as needed */
+    }
+</style>

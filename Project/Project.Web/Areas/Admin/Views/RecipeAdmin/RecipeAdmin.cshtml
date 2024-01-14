@@ -1,0 +1,44 @@
+﻿<div class="container mt-5">
+    <h1>Administrace receptů </h1>
+
+    <div class="mb-3 d-flex justify-content-end">
+        <a asp-area="Admin" asp-controller="MenuAdmin" asp-action="Index" class="btn btn-primary">Jídelníčky</a>
+        <a asp-area="Admin" asp-controller="TipAdmin" asp-action="Index" class="btn btn-primary">Tipy</a>
+    </div>
+
+    <div>
+        <h2>Recepty</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Jméno receptu</th>
+                    <th>Potřebný čas</th>
+                    <th>Obtížnost</th>
+                    <th>Cena</th>
+                    <th>Akce</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var recipe in Model)
+                {
+                    <tr>
+                        <td>@recipe.Name</td>
+                        <td>@recipe.TimeForRecipe</td>
+                        <td>@recipe.Difficulty</td>
+                        <td>@recipe.Price</td>
+                        <td>
+                            <a asp-area="Admin" asp-controller="RecipeAdmin" asp-action="Edit" asp-route-id="@recipe.Id" class="btn btn-primary">Edit</a>
+                            <a asp-area="Admin" asp-controller="RecipeAdmin" asp-action="Delete" asp-route-id="@recipe.Id" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #F6F1EE;
+    }
+</style>

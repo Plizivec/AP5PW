@@ -1,0 +1,73 @@
+﻿@model Project.Domain.Entities.Recipe
+
+@{
+    ViewData["Title"] = "Edit Recipe";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h1>Upravte Recept</h1>
+
+        <div style="margin-top: 30px;"></div>
+
+        <form asp-action="Edit" method="post">
+            <div class="mb-3">
+                <label class="form-label" asp-for="Name">Název receptu</label>
+                <input class="form-control" asp-for="Name">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="TimeForRecipe">Čas ( v minutách )</label>
+                <input class="form-control" asp-for="TimeForRecipe">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Difficulty">Obtížnost</label>
+                <input class="form-control" asp-for="Difficulty">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Price">Cena ( v Kč )</label>
+                <input class="form-control" asp-for="Price">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Ingredients">Ingredience ( oddělujte čárkou )</label>
+                <textarea class="form-control" asp-for="Ingredients"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Kategorie</label>
+                @foreach (var category in ViewBag.CategoryList)
+                {
+                    var categoryId = category.Value;
+                    var categoryName = category.Text;
+
+                    <div class="form-check">
+                        <input type="checkbox" name="Categories" value="@categoryId" class="form-check-input" />
+                        <label class="form-check-label">@categoryName</label>
+                        <input type="hidden" name="Categories.Index" value="0" />
+                    </div>
+                }
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Instructions">Instrukce</label>
+                <textarea class="form-control" asp-for="Instructions"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="ImageSrc">Image Source</label>
+                <input class="form-control" asp-for="ImageSrc">
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="background-color: #6C5F5B">Upravit Recept</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #F6F1EE;
+    }
+</style>

@@ -1,0 +1,99 @@
+﻿@model Project.Application.ViewModels.MenuViewModel
+
+<h1>Edit Menu</h1>
+
+<form asp-action="Edit" asp-controller="Menu"  asp-route-id="@Model.Id" method="post">
+    <input asp-for="Id" type="hidden" /> <!-- Add a hidden field for the Id -->
+    <div>
+        <input type="hidden" class="form-control" asp-for="AuthorId" value="@ViewBag.CurrentUserName">
+    </div>
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ImageSrc"></label>
+        <input asp-for="ImageSrc" class="form-control" />
+        <span asp-validation-for="ImageSrc" class="text-danger"></span>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <label><strong style="font-size: 18px;">Day 1</strong></label><br />
+
+        <label>Breakfast:</label>
+        <select asp-for="BreakfastRecipeId1" asp-items="@ViewBag.Recipes"></select>
+
+        <label style="padding-left: 10px;">Lunch:</label>
+        <select asp-for="LunchRecipeId1" asp-items="@ViewBag.Recipes"></select>
+
+        <label style="padding-left: 10px;">Dinner:</label>
+        <select asp-for="DinnerRecipeId1" asp-items="@ViewBag.Recipes"></select>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <label><strong style="font-size: 18px;">Day 2</strong></label><br />
+
+        <label>Breakfast:</label>
+        <select asp-for="BreakfastRecipeId2" asp-items="@ViewBag.Recipes"></select>
+
+        <label style="padding-left: 10px;">Lunch:</label>
+        <select asp-for="LunchRecipeId2" asp-items="@ViewBag.Recipes"></select>
+
+        <label style="padding-left: 10px;">Dinner:</label>
+        <select asp-for="DinnerRecipeId2" asp-items="@ViewBag.Recipes"></select>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <label><strong style="font-size: 18px;">Day 3</strong></label><br />
+
+        <label>Breakfast:</label>
+        <select asp-for="BreakfastRecipeId3" asp-items="@ViewBag.Recipes"></select>
+
+        <label style="padding-left: 10px;">Lunch:</label>
+        <select asp-for="LunchRecipeId3" asp-items="@ViewBag.Recipes"></select>
+
+        <label style="padding-left: 10px;">Dinner:</label>
+        <select asp-for="DinnerRecipeId3" asp-items="@ViewBag.Recipes"></select>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <label><strong style="font-size: 18px;">Day 4</strong></label><br />
+
+        <label>Breakfast:</label>
+        <select asp-for="BreakfastRecipeId4" asp-items="@ViewBag.Recipes"></select>
+
+        <label style="padding-left: 10px;">Lunch:</label>
+        <select asp-for="LunchRecipeId4" asp-items="@ViewBag.Recipes"></select>
+
+        <label style="padding-left: 10px;">Dinner:</label>
+        <select asp-for="DinnerRecipeId4" asp-items="@ViewBag.Recipes"></select>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <label><strong style="font-size: 18px;">Day 5</strong></label><br />
+
+        <label>Breakfast:</label>
+        <select asp-for="BreakfastRecipeId5" asp-items="@ViewBag.Recipes"></select>
+
+        <label style="padding-left: 10px;">Lunch:</label>
+        <select asp-for="LunchRecipeId5" asp-items="@ViewBag.Recipes"></select>
+
+        <label style="padding-left: 10px;">Dinner:</label>
+        <select asp-for="DinnerRecipeId5" asp-items="@ViewBag.Recipes"></select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Edit Menu</button>
+</form>
+<style>
+    body {
+        background-color: #F6F1EE;
+    }
+</style>

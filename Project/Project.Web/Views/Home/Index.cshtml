@@ -1,0 +1,47 @@
+﻿@model RecipeViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Kategorie</h1>
+</div>
+
+<div class="d-flex justify-content-end" style="margin-right: 30px;">
+    <a asp-controller="Category" asp-action="AllRecipes" class="btn btn-primary" style="background-color: #6C5F5B">Všechny recepty</a>
+</div>
+
+@if (Model != null && Model.Categories != null && Model.Categories.Count > 0)
+{
+    <section class="py-1">
+        <div class="container px-4 px-lg-5 mt-4">
+            <div class="row gx-4 gx-lg-4 justify-content-start">
+                @for (int i = 0; i < Model.Categories.Count; ++i)
+                {
+                    <div class="col-md-3 mb-3">
+                        <div class="card h-100">
+                            <img class="card-img-top" src="@Model.Categories[i].ImageSrc" alt="Category Image"/>
+                            <div class="text-center" style="background-color: #6C5F5B">
+                                <h4 class="fw-bolder ">
+                                    <a asp-controller="Category" asp-action="Category" asp-route-categoryId="@Model.Categories[i].Id" style="color: #F2EAD3; text-decoration: none">@Model.Categories[i].Name</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+<style>
+    body{
+        background-color: #F6F1EE;
+    }
+</style>
+
+@section Styles
+    {
+    <link rel="stylesheet" href="~/css/shop_home.css" asp-append-version="true" />
+}

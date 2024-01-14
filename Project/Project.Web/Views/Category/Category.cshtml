@@ -1,0 +1,74 @@
+﻿@model Tuple<Category, IList<Recipe>>
+
+@{
+    ViewData["Title"] = "Recipes in Category - " + Model.Item1.Name;
+}
+
+<div class="container mt-4">
+    <h1 class="display-4">Recepty v Kategorii - @Model.Item1.Name</h1>
+
+    <form action="/Category/FilterRecipes" method="post">
+        <div class="d-flex justify-content-center">
+            <div class="form-group has-search" style="width: 50%">
+                <label >Hledaný výraz:</label>
+                <span class="fa fa-search form-control-feedback"></span>
+                <input type="text" class="form-control" placeholder="Search" name="searchTerm" />
+            </div>
+
+            <div class="form-group" style="width: 20%">
+                <label for="difficulty">Obtížnost:</label>
+                <select class="form-control" name="difficulty">
+                    <option value="">-- Jakákoliv --</option>
+                    <option value="snadné">snadné</option>
+                    <option value="střední">střední</option>
+                    <option value="obtížné">obtížné</option>
+                </select>
+            </div>
+
+            <div class="form-group" style="width: 20%">
+                <label for="price">Cena: (v Kč)</label>
+                <input type="number" class="form-control" placeholder="Cena" name="price" />
+            </div>
+
+            <div class="form-group" style="width: 20%">
+                <label for="timeForRecipe">Čas na recept (min):</label>
+                <input type="number" class="form-control" placeholder="Čas na recept" name="timeForRecipe" />
+            </div>
+
+            <input type="hidden" name="categoryId" value="@Model.Item1.Id" />
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+    </form>
+
+    <div id="recipeList">
+        @if (Model.Item2 != null && Model.Item2.Count > 0)
+        {
+            <section class="py-5">
+                <div class="container px-4 px-lg-5 mt-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-start">
+                        @foreach (var recipe in Model.Item2)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <div class="card h-100">
+                                    <img class="card-img-top" src="@recipe.ImageSrc" alt="..." />
+                                    <div class="text-center" style="background-color: #6C5F5B">
+                                        <h4 class="fw-bolder">
+                                            <a asp-action="Recipe" asp-controller="Recipe" asp-route-recipeId="@recipe.Id"
+                                               style="color: #F2EAD3; text-decoration: none">@recipe.Name</a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </section>
+        }
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #F6F1EE;
+    }
+</style>

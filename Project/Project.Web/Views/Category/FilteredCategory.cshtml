@@ -1,0 +1,45 @@
+﻿<!-- FilteredCategory.cshtml -->
+@model Tuple<Category, IList<Recipe>>
+
+@{
+    ViewData["Title"] = "Filtrované Recepty v kategorii - " + Model.Item1.Name;
+}
+
+<div class="text-center">
+    <h1 class="display-4">Filtered Recepty v Kategorii - @Model.Item1.Name</h1>
+</div>
+
+<!-- Display the filtered recipes -->
+<div id="filteredRecipeList">
+    @if (Model.Item2 != null && Model.Item2.Count > 0)
+    {
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 justify-content-start">
+                    @foreach (var recipe in Model.Item2)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <div class="card h-100">
+                                <img class="card-img-top" src="@recipe.ImageSrc" alt="..." />
+                                <div class="text-center" style="background-color: #6C5F5B">
+                                    <h4 class="fw-bolder">
+                                        <a asp-action="Recipe" asp-controller="Recipe" asp-route-recipeId="@recipe.Id" style="color: #F2EAD3; text-decoration: none">@recipe.Name</a>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
+    }
+    else
+    {
+        <p>No recipes found with the specified criteria.</p>
+    }
+</div>
+<style>
+    body {
+        background-color: #F6F1EE;
+    }
+</style>

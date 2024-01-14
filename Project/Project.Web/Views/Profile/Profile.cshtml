@@ -1,0 +1,108 @@
+﻿@model Project.Application.ViewModels.UserProfileViewModel
+
+<div class="container mt-5">
+    <h2>Profil uživatele: @Model.UserName</h2>
+
+    <div class="mb-3 d-flex justify-content-end">
+        <!-- Add links or buttons as needed -->
+    </div>
+
+    <h3>Recipes</h3>
+    @if (Model.Recipes.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <!-- Add other recipe properties as needed -->
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var recipe in Model.Recipes)
+                {
+                    <tr>
+                        <td>@recipe.Id</td>
+                        <td>
+                            <a asp-controller="Recipe" asp-action="Recipe" asp-route-recipeId="@recipe.Id">@recipe.Name</a>
+                        </td>
+                        <!-- Add other recipe properties as needed -->
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No recipes available.</p>
+    }
+
+    <h3>Menus</h3>
+    @if (Model.Menus.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <!-- Add other menu properties as needed -->
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var menu in Model.Menus)
+                {
+                    <tr>
+                        <td>@menu.Id</td>
+                        <td>
+                            <a asp-controller="Menu" asp-action="Details" asp-route-id="@menu.Id">@menu.Name</a>
+                        </td>
+                        <!-- Add other menu properties as needed -->
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No menus available.</p>
+    }
+
+    <h3>Tips</h3>
+    @if (Model.Tips.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <!-- Add other tip properties as needed -->
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var tip in Model.Tips)
+                {
+                    <tr>
+                        <td>@tip.Id</td>
+                        <td>
+                            <a asp-controller="Tip" asp-action="Details" asp-route-id="@tip.Id">@tip.Name</a>
+                        </td>
+                        <!-- Add other tip properties as needed -->  
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No tips available.</p>
+    }
+</div>
+
+<style>
+    body {
+        background-color: #F6F1EE;
+    }
+</style>

@@ -1,0 +1,53 @@
+﻿<!-- SearchResultsRecipe.cshtml -->
+@model IList<Recipe>
+
+@{
+    ViewData["Title"] = "Výsledky vyhledávání";
+}
+
+<h1 class="display-4">Search Results</h1>
+
+@if (Model != null && Model.Count > 0)
+{
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 justify-content-start">
+                @foreach (var recipe in Model)
+                {
+                    <div class="col-md-3 mb-5">
+                        <a asp-action="Details" asp-controller="Recipe" asp-route-id="@recipe.Id" style="text-decoration: none; color: inherit;">
+                            <div class="card h-100">
+                                <img class="card-img-top" src="@recipe.ImageSrc" alt="..." style="height: 200px;" />
+                                <div class="text-center" style="background-color: #6C5F5B">
+                                    <h4 class="fw-bolder" style="color: #F2EAD3;">
+                                        @recipe.Name
+                                    </h4>
+                                </div>
+                                <div class="tip-text" >
+                                    @recipe.Instructions.Substring(0, Math.Min(50, recipe.Instructions.Length))
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <p>No results found.</p>
+}
+
+<style>
+    body {
+        background-color: #F6F1EE;
+    }
+
+    .tip-text {
+        font-weight: bold;
+        font-size: 18px;
+        padding-top: 10px;
+        color: #6C5F5B;
+    }
+</style>

@@ -1,0 +1,40 @@
+﻿@model Project.Application.ViewModels.TipViewModel
+
+@{
+    ViewData["Title"] = "Edit Tip";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h1>Edit Tip</h1>
+
+        <div style="margin-top: 30px;"></div>
+
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Name">Tip Name</label>
+                <input class="form-control" asp-for="Name">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Text">Tip Text</label>
+                <textarea class="form-control" asp-for="Text"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="ImageSrc">Image Source</label>
+                <input class="form-control" asp-for="ImageSrc">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Tip</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #F6F1EE;
+    }
+</style>

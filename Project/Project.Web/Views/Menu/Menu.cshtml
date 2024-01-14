@@ -1,0 +1,88 @@
+﻿@model Project.Domain.Entities.Menu
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="display-5">@Model.Name</h1>
+            <p class="lead"><strong>Popis:</strong> @Model.Description</p>
+            <p><strong>Autor:</strong> @Model.AuthorId</p>
+
+            <div style="margin-top: 30px;"></div>
+
+            <h2 class="display-5 mb-4">Jídelníček</h2>
+
+            <div class="row">
+                @for (int day = 1; day <= 5; day++)
+                {
+                    <div class="col-md-4 mb-3">
+                        <div style="margin-top: 30px;">
+                            <h3 class="mb-3">Den @day</h3>
+                            @{
+                                int baseIndex = ((day - 1) % 5) * 3;
+                                string recipeOrderString = Model.RecipeOrder;
+                                List<int> recipeOrderList = !string.IsNullOrEmpty(recipeOrderString)
+                                ? recipeOrderString.Split(',').Select(int.Parse).ToList()
+                                : new List<int>();
+                                int? breakfastRecipeId = recipeOrderList.Count > baseIndex ? recipeOrderList[baseIndex] : (int?)null;
+                                int? lunchRecipeId = recipeOrderList.Count > baseIndex + 1 ? recipeOrderList[baseIndex + 1] : (int?)null;
+                                int? dinnerRecipeId = recipeOrderList.Count > baseIndex + 2 ? recipeOrderList[baseIndex + 2] : (int?)null;
+                            }
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Snídaně</h5>
+                                    <p class="card-text">
+                                        <a href="@Url.Action("Details", "Recipe", new { recipeId = breakfastRecipeId })" class="text-decoration-none">
+                                            @Html.Raw(Model.Recipes.FirstOrDefault(r => r.Id == breakfastRecipeId)?.Name ?? "No Recipe Selected")
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Oběd</h5>
+                                    <p class="card-text">
+                                        <a href="@Url.Action("Details", "Recipe", new { recipeId = lunchRecipeId })" class="text-decoration-none">
+                                            @Html.Raw(Model.Recipes.FirstOrDefault(r => r.Id == lunchRecipeId)?.Name ?? "No Recipe Selected")
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Večeře</h5>
+                                    <p class="card-text">
+                                        <a href="@Url.Action("Details", "Recipe", new { recipeId = dinnerRecipeId })" class="text-decoration-none">
+                                            @Html.Raw(Model.Recipes.FirstOrDefault(r => r.Id == dinnerRecipeId)?.Name ?? "No Recipe Selected")
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #F6F1EE;
+    }
+
+    .card {
+        width: 100%;
+        background-color: #FFF;
+    }
+
+    .card-body {
+        text-align: center;
+    }
+</style>

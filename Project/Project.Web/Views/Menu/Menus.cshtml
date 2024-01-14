@@ -1,0 +1,58 @@
+﻿@model IList<Project.Domain.Entities.Menu>
+
+@{
+    ViewData["Title"] = "Menus";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Menus</h1>
+</div>
+
+<div class="text-center mt-3">
+    <a asp-action="Create" asp-controller="Menu" class="btn btn-primary">Create New Menu</a>
+</div>
+
+@if (Model != null && Model.Count > 0)
+{
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 justify-content-start">
+                @foreach (var menu in Model)
+                {
+                    <div class="col-md-3 mb-5">
+                        <a href="@Url.Action("Details", "Menu", new { id = menu.Id })" style="text-decoration: none; color: inherit;">
+                            <div class="card h-100">
+                                <!-- Display an image for the menu -->
+                                <img class="card-img-top" src="@menu.ImageSrc" alt="Menu Image" style="height: 200px; object-fit: cover;" />
+
+                                <div class="text-center" style="background-color: #6C5F5B">
+                                    <h4 class="fw-bolder" style="color: #F2EAD3;">
+                                        @menu.Name
+                                    </h4>
+                                </div>
+
+                                <div class="menu-description" style="background-color: #FFFAF7">
+                                    @menu.Description.Substring(0, Math.Min(50, menu.Description.Length))
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<style>
+    body {
+        background-color: #F6F1EE;
+    }
+
+    .menu-description {
+        font-weight: bold;
+        font-size: 18px;
+        padding-top: 10px;
+        padding-left: 5px;
+        color: #6C5F5B; /* You can adjust the text color as needed */
+    }
+</style>
