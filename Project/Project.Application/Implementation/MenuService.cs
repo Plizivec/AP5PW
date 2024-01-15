@@ -85,10 +85,15 @@ namespace Project.Application.Implementation
 
         public bool DeleteMenu(int id)
         {
-            Menu? menu = _dbContext.Menus.FirstOrDefault(m => m.Id == id);
+            Menu? menu = _dbContext.Menus.Include(m => m.Recipes).FirstOrDefault(m => m.Id == id);
 
             if (menu != null)
             {
+                foreach (var recipe in menu.Recipes)
+                {
+                    _dbContext.Recipes.Remove(recipe);
+                }
+
                 _dbContext.Menus.Remove(menu);
                 _dbContext.SaveChanges();
                 return true;
